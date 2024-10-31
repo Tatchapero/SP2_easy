@@ -20,7 +20,7 @@ public class AudioBook extends Title {
 
     ## Description
     Points are calculated based on:
-    - Pages
+    - Duration
     - Literature type
     - Copies
 

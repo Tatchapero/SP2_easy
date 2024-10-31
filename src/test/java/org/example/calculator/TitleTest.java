@@ -1,6 +1,7 @@
 package org.example.calculator;
 
 import org.example.enums.LiteratureType;
+import org.example.utility.ConfigFileReader;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -147,22 +148,26 @@ class TitleTest {
 
     @Test
     void calculateRoyalty() {
-        // Arrange
-        int copies = 72;
-        int pages = 140;
-        int durationInMinutes = pages;
-        double rate = 0.067574;
-        PrintedBook printedBook = new PrintedBook("Title", "FAG", copies, pages);
-        AudioBook audioBook = new AudioBook("Title", "FAG", copies, durationInMinutes);
-        double expected1 = (pages * LiteratureType.valueOfPointsPerPage("FAG") * copies) * rate;
-        double expected2 = ((durationInMinutes * 0.5) * LiteratureType.valueOfPointsPerMinute("FAG") * copies) * rate;
+        for (String literatureType : LiteratureType.typesAsList()) {
+            // Arrange
+            int copies = 72;
+            int pages = 140;
+            int durationInMinutes = 400;
+            double rate = ConfigFileReader.getRate();
 
-        // Act
-        double actual1 = printedBook.calculateRoyalty();
-        double actual2 = audioBook.calculateRoyalty();
+            double expected1 = (pages * (double)LiteratureType.valueOfPointsPerPage(literatureType) * copies) * rate;
+            double expected2 = ((durationInMinutes * 0.5f) * (double)LiteratureType.valueOfPointsPerMinute(literatureType) * copies) * rate;
 
-        // Assert
-        assertEquals(expected1, actual1);
-        assertEquals(expected2, actual2);
+            PrintedBook printedBook = new PrintedBook("Title", literatureType, copies, pages);
+            AudioBook audioBook = new AudioBook("Title", literatureType, copies, durationInMinutes);
+
+            // Act
+            double actual1 = printedBook.calculateRoyalty();
+            double actual2 = audioBook.calculateRoyalty();
+
+            // Assert
+            assertEquals(expected1, actual1);
+            assertEquals(expected2, actual2);
+        }
     }
 }

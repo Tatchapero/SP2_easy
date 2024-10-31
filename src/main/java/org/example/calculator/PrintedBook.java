@@ -31,9 +31,7 @@ public class PrintedBook extends Title {
     Points
      */
     @Override
-    protected double calculatePoints() {
-        return pages * calculateLiteraturePoints() * copies;
-    }
+    protected double calculatePoints() { return pages * calculateLiteraturePoints() * copies; }
 
     /*
     # Calculation of literature points
@@ -51,7 +49,5 @@ public class PrintedBook extends Title {
     | Non-fiction (FAG)     | 1                 |
      */
     @Override
-    protected double calculateLiteraturePoints() {
-        return LiteratureType.valueOfPointsPerPage(getLiteratureType());
-    }
+    protected double calculateLiteraturePoints() { return LiteratureType.valueOfPointsPerPage(getLiteratureType()); }
 }

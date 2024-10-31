@@ -2,14 +2,13 @@ package org.example;
 
 import org.example.calculator.*;
 import org.example.enums.LiteratureType;
-import org.example.utility.Helper;
 
 public class LibraryRoyaltyCalculator {
     public static void main(String[] args) {
-        Author a1 = new Author(Helper.getRandomFullName());
-        a1.addTitle(new AudioBook("Hello World!", LiteratureType.LYRICS.type, Helper.getRandomInt(0, 100), Helper.getRandomInt(100, 3000)));
-        a1.addTitle(new PrintedBook("The Lord of the Exceptions", LiteratureType.FICTION.type, Helper.getRandomInt(0, 100), Helper.getRandomInt(100, 3000)));
-        a1.addTitle(new PrintedBook("Java 1.0", LiteratureType.NONFICTION.type, Helper.getRandomInt(0, 100), Helper.getRandomInt(100, 3000)));
+        Author a1 = new Author("Sussi Bech");
+        a1.addTitle(new AudioBook("Hello World!", LiteratureType.FICTION.type, 10, 400));
+        a1.addTitle(new PrintedBook("Super-Dev", LiteratureType.COMICS.type, 140, 72));
+        a1.addTitle(new PrintedBook("Java 1.0", LiteratureType.NONFICTION.type, 0, 1000));
 
         printResult(a1);
     }
